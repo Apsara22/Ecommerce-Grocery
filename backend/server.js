@@ -4,6 +4,7 @@ import cors from "cors";
 import connectDb from "./config/db.js";
 import dotenv from "dotenv";
 
+import productRouter from "./routes/productRoute.js";
 import userRouter from "./routes/userRoute.js";
 import adminRouter from "./routes/adminRoute.js";
 import categoryRouter from "./routes/categoryRoute.js";
@@ -28,6 +29,7 @@ app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use("/api/user", userRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/category", categoryRouter);
+app.use("/api/product", productRouter);
 // test route
 app.get("/", (req, res) => {
   res.send("Hello World");

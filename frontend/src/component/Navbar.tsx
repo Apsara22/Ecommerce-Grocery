@@ -7,11 +7,21 @@ import { IoClose } from "react-icons/io5";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  const toggleProfileMenu = () => {
+    setShowProfileMenu(!showProfileMenu);
+  };
 
+  // logout
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    setShowProfileMenu(false);
+    window.location.reload(); // refresh UI
+  };
   return (
     <nav className="bg-purple-600 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,12 +71,37 @@ const Navbar = () => {
             </div>
 
             {/* Profile Icon */}
-            <Link
-              to="/asked"
-              className="text-white hover:text-purple-200 transition duration-300 ease-in-out font-medium text-2xl"
-            >
-              <CgProfile className={isLoggedIn ? "text-green-400" : "text-white"} />
-            </Link>
+            <div className="relative">
+              <button
+                onClick={toggleProfileMenu}
+                className="text-2xl text-white"
+              >
+                <CgProfile className={isLoggedIn ? "text-green-400" : "text-white"} />
+              </button>
+
+              {showProfileMenu && (
+                <div className="absolute right-0 mt-2 w-32 bg-white rounded shadow-lg overflow-hidden z-50">
+
+                  {isLoggedIn ? (
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500"
+                    >
+                      Logout
+                    </button>
+                  ) : (
+                    <Link
+                      to="/asked"
+                      className="block px-4 py-2 hover:bg-gray-100 text-green-600"
+                      onClick={() => setShowProfileMenu(false)}
+                    >
+                      Login
+                    </Link>
+                  )}
+
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile menu button - Shows hamburger or cross icon */}
@@ -125,13 +160,18 @@ const Navbar = () => {
 
           {/* Profile Icon in Mobile Menu */}
           <Link
-            to="/asked"
-            className="text-white block px-3 py-2 hover:bg-purple-700 rounded transition duration-200"
-            onClick={() => setIsMenuOpen(false)}
+            to={isLoggedIn ? "#" : "/asked"}
+            onClick={() => {
+              if (isLoggedIn) {
+                handleLogout();
+              }
+              setIsMenuOpen(false);
+            }}
+            className="text-white block px-3 py-2 hover:bg-purple-700 rounded"
           >
             <div className="flex items-center gap-2">
               <CgProfile className={`text-xl ${isLoggedIn ? "text-green-400" : "text-white"}`} />
-              <span>Profile</span>
+              <span>{isLoggedIn ? "Logout" : "Login"}</span>
             </div>
           </Link>
         </div>
