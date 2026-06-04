@@ -50,3 +50,14 @@
     opacity: 0.15;
   }
 }
+
+.hero {
+  background-image: url(./assets/hero.jpg);
+  background-size: cover;     
+  background-position: center; 
+  background-repeat: no-repeat;
+  min-height: 100vh;          
+}
+.sub-color{
+  color: #ffb20a;
+}

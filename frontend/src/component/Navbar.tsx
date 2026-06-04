@@ -4,7 +4,7 @@ import { CgProfile } from "react-icons/cg";
 import { CiSearch } from "react-icons/ci";
 import { FiMenu } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
-
+import { FaShoppingCart } from "react-icons/fa";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -68,6 +68,18 @@ const Navbar = () => {
                 className="w-48 px-4 py-1.5 pl-10 pr-3 rounded-full bg-purple-500 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-300 transition duration-300"
               />
               <CiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white text-xl" />
+            </div>
+
+            {/* Cart Icon */}
+            <div className="relative">
+              <button className="text-white text-2xl hover:text-purple-200 transition">
+                <FaShoppingCart />
+              </button>
+
+              {/* Cart Count */}
+              <span className="absolute -top-2 -right-2 bg-[#ffb20a] text-purple-600 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                0
+              </span>
             </div>
 
             {/* Profile Icon */}
