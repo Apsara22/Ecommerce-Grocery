@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
-import { FiPlus, FiList, FiShoppingBag } from "react-icons/fi";
+import { FiPlus, FiList, FiShoppingBag, FiTag } from "react-icons/fi";
+import AddCategory from './AddCategory';
 import AddProduct from './AddProduct';
 import ProductList from './ProductList';
 import Orderlist from './Orderlist';
+import CategoryList from './CategoryList';
 
 const Adminpage = () => {
   const [activeTab, setActiveTab] = useState('welcome');
 
   const renderContent = () => {
-    switch(activeTab) {
+    switch (activeTab) {
+      case 'add-category':
+        return <AddCategory />;
+      case 'category-list':
+        return <CategoryList />;
       case 'add-product':
         return <AddProduct />;
       case 'product-list':
@@ -26,14 +32,35 @@ const Adminpage = () => {
       <aside className="w-64 bg-purple-700 text-white shadow-lg">
         <div className="p-6">
           <h2 className="text-2xl font-bold mb-8 text-center">Admin Panel</h2>
-          
+
           <nav className="space-y-2">
+            {/* Add category */}
+            <button
+              onClick={() => setActiveTab('add-category')}
+              className={`w-full flex items-center px-4 py-3 rounded-lg transition duration-300 ${activeTab === 'add-category'
+                ? 'bg-purple-600'
+                : 'hover:bg-purple-600'
+                }`}
+            >
+              <FiTag className="w-5 h-5 mr-3" />
+              <span className="font-medium">Add Category</span>
+            </button>
+            {/* Category List */}
+            <button
+              onClick={() => setActiveTab('category-list')}
+              className={`w-full flex items-center px-4 py-3 rounded-lg transition duration-300 ${activeTab === 'category-list'
+                  ? 'bg-purple-600'
+                  : 'hover:bg-purple-600'
+                }`}
+            >
+              <FiList className="w-5 h-5 mr-3" />
+              <span className="font-medium">Category List</span>
+            </button>
             {/* Add Product */}
             <button
               onClick={() => setActiveTab('add-product')}
-              className={`w-full flex items-center px-4 py-3 rounded-lg transition duration-300 group ${
-                activeTab === 'add-product' ? 'bg-purple-600' : 'hover:bg-purple-600'
-              }`}
+              className={`w-full flex items-center px-4 py-3 rounded-lg transition duration-300 group ${activeTab === 'add-product' ? 'bg-purple-600' : 'hover:bg-purple-600'
+                }`}
             >
               <FiPlus className="w-5 h-5 mr-3" />
               <span className="font-medium">Add Product</span>
@@ -42,9 +69,8 @@ const Adminpage = () => {
             {/* Product List */}
             <button
               onClick={() => setActiveTab('product-list')}
-              className={`w-full flex items-center px-4 py-3 rounded-lg transition duration-300 group ${
-                activeTab === 'product-list' ? 'bg-purple-600' : 'hover:bg-purple-600'
-              }`}
+              className={`w-full flex items-center px-4 py-3 rounded-lg transition duration-300 group ${activeTab === 'product-list' ? 'bg-purple-600' : 'hover:bg-purple-600'
+                }`}
             >
               <FiList className="w-5 h-5 mr-3" />
               <span className="font-medium">Product List</span>
@@ -53,9 +79,8 @@ const Adminpage = () => {
             {/* Order */}
             <button
               onClick={() => setActiveTab('order')}
-              className={`w-full flex items-center px-4 py-3 rounded-lg transition duration-300 group ${
-                activeTab === 'order' ? 'bg-purple-600' : 'hover:bg-purple-600'
-              }`}
+              className={`w-full flex items-center px-4 py-3 rounded-lg transition duration-300 group ${activeTab === 'order' ? 'bg-purple-600' : 'hover:bg-purple-600'
+                }`}
             >
               <FiShoppingBag className="w-5 h-5 mr-3" />
               <span className="font-medium">Order</span>

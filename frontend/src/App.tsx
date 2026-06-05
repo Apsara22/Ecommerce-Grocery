@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Admin from './admin/Adminpage';
 import Asked from './component/Asked';
 import AdminLogin from './admin/AdminLogin';
+import CategoryPage from './pages/CategoryPage';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/asked" element={<Asked />} />
+            <Route path="/category" element={<CategoryPage />} />
           </Routes>
         </main>
 

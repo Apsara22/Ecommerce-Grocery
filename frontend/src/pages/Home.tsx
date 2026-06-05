@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../component/Navbar'  
 import Hero from '../component/Hero'    
 import Footer from '../component/Footer'  
+import CategoryPage from './CategoryPage'
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <Navbar />
       <main className="flex-grow">
         <Hero />
+         <CategoryPage />
       </main>
       <Footer />
     </div>

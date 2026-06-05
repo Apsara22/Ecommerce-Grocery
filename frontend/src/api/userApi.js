@@ -18,11 +18,25 @@ const productAPI = axios.create({
   withCredentials: true,
 });
 
-//Categories
+// CATEGORY API
+const categoryAPI = axios.create({
+  baseURL: "http://localhost:3000/api/category",
+  withCredentials: true,
+});
+
+// Categories
 export const getCategories = () =>
-  axios.get("http://localhost:3000/api/category/all");
+  categoryAPI.get("/all");
+
+export const createCategory = (data) =>
+  categoryAPI.post("/add", data);
+
+export const deleteCategory = (id) =>
+  categoryAPI.delete(`/delete/${id}`);
+
 // USER
-export const loginUser = (data) => userAPI.post("/login", data);
+export const loginUser = (data) =>
+  userAPI.post("/login", data);
 
 export const registerUser = (data) =>
   userAPI.post("/register", data);
