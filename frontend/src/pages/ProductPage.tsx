@@ -21,11 +21,15 @@ interface Product {
 
 const ProductPage: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
+    const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
 
     useEffect(() => {
         fetchProducts();
     }, []);
 
+    const getQuantity = (id: string) => {
+        return quantities[id] || 1;
+    };
     const fetchProducts = async () => {
         try {
             const response = await getProducts();
@@ -142,23 +146,62 @@ const ProductPage: React.FC = () => {
                                         {renderStars()}
                                     </div>
 
-                                    {/* Price */}
-                                    <div className="flex items-center gap-2 mb-4">
-                                        <span className="text-2xl font-bold text-purple-700">
-                                            ₹{discountPrice.toFixed(2)}
-                                        </span>
+                                    {/* Price and Quantity Selector - Same Line */}
+                                    <div className="flex items-center justify-between gap-2 mb-4">
+                                        {/* Price Section - Left Side */}
+                                        <div className="flex items-center gap-2 flex-wrap">
+                                            <span className="text-2xl font-bold text-purple-700">
+                                                ₹{discountPrice.toFixed(2)}
+                                            </span>
 
-                                        {product.productOffer > 0 && (
-                                            <>
-                                                <span className="text-gray-400 line-through text-sm">
-                                                    ₹{product.productPrice}
-                                                </span>
+                                            {product.productOffer > 0 && (
+                                                <>
+                                                    <span className="text-gray-400 line-through text-sm">
+                                                        ₹{product.productPrice}
+                                                    </span>
 
-                                                <span className="text-green-600 text-sm font-semibold">
-                                                    {product.productOffer}% OFF
-                                                </span>
-                                            </>
-                                        )}
+                                                    <span className="text-green-600 text-sm font-semibold">
+                                                        {product.productOffer}% OFF
+                                                    </span>
+                                                </>
+                                            )}
+                                        </div>
+
+                                        {/* Quantity Selector - Right Side */}
+                                        <div className="flex items-center border rounded-lg px-3 py-2">
+
+                                            {/* MINUS */}
+                                            <button
+                                                onClick={() =>
+                                                    setQuantities((prev) => ({
+                                                        ...prev,
+                                                        [product._id]: Math.max((prev[product._id] || 1) - 1, 1),
+                                                    }))
+                                                }
+                                                className="text-xl font-bold text-purple-700 px-2"
+                                            >
+                                                -
+                                            </button>
+
+                                            {/* VALUE */}
+                                            <span className="text-lg font-semibold mx-2">
+                                                {getQuantity(product._id)}
+                                            </span>
+
+                                            {/* PLUS */}
+                                            <button
+                                                onClick={() =>
+                                                    setQuantities((prev) => ({
+                                                        ...prev,
+                                                        [product._id]: (prev[product._id] || 1) + 1,
+                                                    }))
+                                                }
+                                                className="text-xl font-bold text-purple-700 px-2"
+                                            >
+                                                +
+                                            </button>
+
+                                        </div>
                                     </div>
 
                                     {/* Button */}
