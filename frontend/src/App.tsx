@@ -8,6 +8,7 @@ import Admin from './admin/Adminpage';
 import Asked from './component/Asked';
 import AdminLogin from './admin/AdminLogin';
 import CategoryPage from './pages/CategoryPage';
+import ProductPage from './pages/ProductPage';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/asked" element={<Asked />} />
             <Route path="/category" element={<CategoryPage />} />
+            <Route path="/product" element={<ProductPage />} />
           </Routes>
         </main>
 
