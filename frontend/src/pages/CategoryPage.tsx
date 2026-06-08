@@ -1,9 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { getCategories } from '../api/userApi';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from "react";
+import { getCategories } from "../api/userApi";
+import { toast } from "react-toastify";
 
-const CategoryPage = () => {
-  const [categories, setCategories] = useState([]);
+interface Category {
+  _id: string;
+  name: string;
+  image: string;
+}
+
+interface Props {
+  onCategorySelect: (categoryId: string) => void;
+}
+
+const CategoryPage: React.FC<Props> = ({ onCategorySelect }) => {
+  const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
     fetchCategories();
@@ -26,35 +36,29 @@ const CategoryPage = () => {
 
   return (
     <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-8 shadow-sm w-full">
-
-      {/* Heading (FULL WIDTH LEFT) */}
-      <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-700 to-pink-600 bg-clip-text text-transparent mb-4 text-left">
-        Fresh Groceries Delivered to Your Doorstep
+      
+      <h3 className="text-3xl font-bold mb-4 text-left">
+        Fresh Groceries Delivered
       </h3>
 
-      {/* Paragraph (FULL WIDTH LEFT) */}
-      <p className="text-[#ffb20a] leading-relaxed text-base md:text-lg mb-6 text-left w-full">
-        Discover a wide range of fresh fruits,
-        vegetables, dairy products, and daily essentials at Hamro Grocery.
-        Shop easily and get quality products delivered quickly and safely to your home.
-        Your everyday needs, made simple and convenient.
+      <p className="mb-6 text-[#ffb20a]">
+        Discover fresh groceries...
       </p>
 
-      {/* CATEGORY SECTION (FULL WIDTH FLEX) */}
-   
       <div className="flex flex-wrap gap-8 w-full justify-start">
         {categories.map((category) => (
           <div
             key={category._id}
-            className="flex flex-col items-center"
+            onClick={() => onCategorySelect(category._id)}
+            className="flex flex-col items-center cursor-pointer hover:scale-105 transition-transform"
           >
             <img
               src={category.image}
               alt={category.name}
-              className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-purple-500 shadow-lg hover:scale-105 transition-transform duration-300"
+              className="w-32 h-32 rounded-full border-4 border-purple-500 object-cover"
             />
 
-            <p className="mt-3 text-base font-semibold text-gray-700">
+            <p className="mt-3 font-semibold text-center">
               {category.name}
             </p>
           </div>
