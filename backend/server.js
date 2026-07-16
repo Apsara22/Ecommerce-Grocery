@@ -23,8 +23,8 @@ app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(cookieParser());
 
 const allowedOrigins = [
-  "http://localhost:5173",
-  // "https://your-frontend.vercel.app" // Replace with your frontend URL
+  "https://ecommerce-grocery-7k1t.vercel.app/",
+  
 ];
 
 app.use(
