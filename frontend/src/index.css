@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import "tailwindcss";
+*{
+ font-family: "Poppins", sans-serif;
+
+}
+
+/* Letter Bounce Animation */
+@keyframes letterBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.5);
+    filter: blur(5px);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.15);
+    filter: blur(0);
+  }
+  70% {
+    transform: translateY(2px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.animate-letter-bounce {
+  animation: letterBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  opacity: 0;
+}
+
+/* Optional: Add hover effects for letters */
+.letter-span:hover {
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
+  cursor: default;
+}
+
+/* Responsive adjustments for circles on smaller screens */
+@media (max-width: 768px) {
+  .circle-1,
+  .circle-2,
+  .circle-3,
+  .circle-4,
+  .circle-5 {
+    opacity: 0.15;
+  }
+}
+
+.hero {
+  background-image: url(./assets/hero.jpg);
+  background-size: cover;     
+  background-position: center; 
+  background-repeat: no-repeat;
+  min-height: 100vh;          
+}
+.sub-color{
+  color: #ffb20a;
+}

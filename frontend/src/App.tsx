@@ -1,0 +1,50 @@
+import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from "./pages/Home";
+import { ToastContainer } from "react-toastify";
+import Welcome from './pages/Welcome';
+import Login from './pages/Login';
+import Admin from './admin/Adminpage';
+import Asked from './component/Asked';
+import AdminLogin from './admin/AdminLogin';
+import CategoryPage from './pages/CategoryPage';
+import CategoryProductsPage from './pages/CategoryProductsPage';
+import ProductPage from './pages/ProductPage';
+
+const CategorySection = () => {
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
+
+  return (
+    <>
+      <CategoryPage onCategorySelect={setSelectedCategoryId} />
+      <CategoryProductsPage categoryId={selectedCategoryId} />
+    </>
+  );
+};
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <div className="app">
+
+        <main className="main-content">
+          <ToastContainer position="top-right" autoClose={3000} />
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin-login" element={<AdminLogin />} />
+            <Route path="/asked" element={<Asked />} />
+            <Route path="/category" element={<CategorySection />} />
+            <Route path="/product" element={<ProductPage />} />
+
+          </Routes>
+        </main>
+
+      </div>
+    </BrowserRouter>
+  );
+};
+
+export default App;
