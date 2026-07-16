@@ -23,9 +23,15 @@ app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(cookieParser());
 
 const allowedOrigins = [
-  "https://ecommerce-grocery-7k1t.vercel.app/",
-  
+  "https://ecommerce-grocery-7k1t.vercel.app",
 ];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
 app.use(
   cors({
